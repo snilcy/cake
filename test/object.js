@@ -70,4 +70,21 @@ describe('deepMerge', () => {
       },
     })
   })
+  test('merge correctly arrays', () => {
+    const one = {
+      one: 1,
+      two: 'str',
+      arr: [ 1, 3 ],
+    }
+
+    expect(deepMerge({}, one, {
+      three: true,
+      arr: one.arr.concat(7),
+    })).toEqual({
+      one: 1,
+      two: 'str',
+      three: true,
+      arr: [ 1,3,7 ],
+    })
+  })
 })
