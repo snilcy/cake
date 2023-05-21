@@ -1,3 +1,4 @@
+export const isString = (el) => typeof el === 'string'
 export const isNull = (el) => el === null
 export const isArray = (el) => Array.isArray(el)
 export const isObject = (el) =>
