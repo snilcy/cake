@@ -1,3 +1,4 @@
 export * from './type.js'
-export * from './get.js'
+export * from './class.js'
 export * from './object.js'
+export * from './array.js'
