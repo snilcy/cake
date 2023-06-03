@@ -28,7 +28,7 @@ export const shallowMerge = <F extends object, S extends object>(first: F, secon
   ...second,
 })
 
-export const merge = <T extends object>(first: T, second: T) => {
+export const merge = <T extends object>(first: T, second: Partial<T>) => {
   const target = clone(first)
 
   for (const key in second) {
@@ -39,7 +39,7 @@ export const merge = <T extends object>(first: T, second: T) => {
       if (isObject(targetValue) && isObject(secondValue)) {
         target[key] = merge(targetValue, secondValue)
       } else {
-        target[key] = secondValue
+        target[key] = secondValue as typeof targetValue
       }
 
     }
