@@ -1,8 +1,8 @@
-import { merge, deepMerge } from '../src/object.js'
+import { shallowMerge, merge } from '../build/object.js'
 
-describe('merge', () => {
-  test('merge correctly single', () => {
-    expect(merge({
+describe('shallowMerge', () => {
+  test('shallowMerge correctly single', () => {
+    expect(shallowMerge({
       one: 1,
       two: 'str',
       inner: { some: Error },
@@ -14,31 +14,13 @@ describe('merge', () => {
       two: 'str',
       three: true,
       inner: null,
-    })
-  })
-  test('merge correctly multiply', () => {
-    expect(merge({
-      one: 1,
-      two: 'str',
-      inner: { some: Error },
-    }, {
-      three: true,
-      inner: null,
-    }, {
-      four: 4,
-    })).toEqual({
-      one: 1,
-      two: 'str',
-      three: true,
-      inner: null,
-      four: 4,
     })
   })
 })
 
-describe('deepMerge', () => {
+describe('merge', () => {
   test('merge correctly single', () => {
-    expect(deepMerge({
+    expect(merge({
       one: 1,
       two: 'str',
       inner: { some: Error },
@@ -52,32 +34,13 @@ describe('deepMerge', () => {
       inner: { some: Error, foo: { bar: 137 }},
     })
   })
-  test('merge correctly multiply', () => {
-    expect(deepMerge({
-      one: 1,
-      two: 'str',
-      inner: { some: Error },
-    }, {
-      three: true,
-      inner: { foo: { bar: 137 }},
-    }, {
-      three: { name: 'JR' },
-    })).toEqual({
-      one: 1,
-      two: 'str',
-      three: { name: 'JR' },
-      inner: { some: Error, foo: { bar: 137 },
-      },
-    })
-  })
   test('merge correctly arrays', () => {
     const one = {
       one: 1,
       two: 'str',
       arr: [ 1, 3 ],
     }
-
-    expect(deepMerge({}, one, {
+    expect(merge(one, {
       three: true,
       arr: one.arr.concat(7),
     })).toEqual({

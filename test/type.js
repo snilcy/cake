@@ -1,4 +1,4 @@
-import { isError, isNull, isObject } from '../src/type.js'
+import { isError, isNull, isObject } from '../build/type.js'
 
 class SomeError extends Error {}
 

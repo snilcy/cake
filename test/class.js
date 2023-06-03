@@ -1,4 +1,4 @@
-import { getConstructorName } from '../src/get.js'
+import { getConstructorName } from '../build/class'
 
 class Cat {}
 
