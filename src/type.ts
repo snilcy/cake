@@ -4,7 +4,7 @@ export const isString = (el: any): el is string => typeof el === 'string'
 
 export const isNull = (el: any): el is null => el === null
 
-export const isArray = (el: any) => Array.isArray(el)
+export const isArray = (el: any): el is any[] => Array.isArray(el)
 
 export const isObject = (el: any): el is object =>
   typeof el === 'object' &&
