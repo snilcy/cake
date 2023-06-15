@@ -5,7 +5,7 @@
   "main": "./build/index.js",
   "type": "module",
   "scripts": {
-    "start": "tsc --watch",
+    "tsc": "tsc --watch",
     "build": "tsc",
     "test": "jest --watch"
   },
