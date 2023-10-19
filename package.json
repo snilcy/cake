@@ -2,12 +2,15 @@
   "name": "@snilcy/cake",
   "version": "2.0.0",
   "description": "",
-  "main": "./build/index.js",
+  "exports": "./build/index.js",
   "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
-    "tsc": "tsc --watch",
     "build": "tsc",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "tsc": "tsc --watch"
   },
   "keywords": [],
   "author": "",
