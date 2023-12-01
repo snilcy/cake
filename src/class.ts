@@ -1,2 +1,2 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const getConstructorName = (el: any): string => el?.constructor?.name
+export const getConstructorName = (element: any): string => element?.constructor?.name

@@ -1,19 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+export const isString = (element: any): element is string => typeof element === 'string'
 
-export const isString = (el: any): el is string => typeof el === 'string'
+export const isNull = (element: any): element is null => element === null
 
-export const isNull = (el: any): el is null => el === null
+export const isArray = (element: any): element is any[] => Array.isArray(element)
 
-export const isArray = (el: any): el is any[] => Array.isArray(el)
+export const isObject = (element: any): element is object =>
+  typeof element === 'object' &&
+    !isNull(element) &&
+    !isArray(element)
 
-export const isObject = (el: any): el is object =>
-  typeof el === 'object' &&
-    !isNull(el) &&
-    !isArray(el)
+export const isFunction = (element: any): element is Function => typeof element === 'function'
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export const isFunction = (el: any): el is Function => typeof el === 'function'
+export const isError = (element: any): element is Error => element instanceof Error
 
-export const isError = (el: any): el is Error => el instanceof Error
-
-export const isUndefined = (el: any): el is undefined => typeof el === 'undefined'
+export const isUndefined = (element: any): element is undefined => element === undefined

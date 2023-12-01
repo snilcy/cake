@@ -1,4 +1,4 @@
-import { isObject } from './type.js'
+import { isObject } from './type'
 
 export const shallowClone = <T extends object>(target: T): T => ({
   ...target,
@@ -13,20 +13,19 @@ export const clone = <T extends object>(target: T): T => {
 
       if (isObject(value)) {
         result[key] = clone(value)
-      } else {
+      }
+      else {
         target[key] = value
       }
-
     }
   }
 
   return target
 }
 
-export const shallowMerge = <F extends object, S extends object>(first: F, second: S) => ({
-  ...first,
-  ...second,
-})
+export const shallowMerge = <F, S >(first: F, second: S): F & S => {
+  return Object.assign({}, first, second)
+}
 
 export const merge = <T extends object>(first: T, second: Partial<T>) => {
   const target = clone(first)
@@ -36,12 +35,7 @@ export const merge = <T extends object>(first: T, second: Partial<T>) => {
       const secondValue = second[key]
       const targetValue = target[key]
 
-      if (isObject(targetValue) && isObject(secondValue)) {
-        target[key] = merge(targetValue, secondValue)
-      } else {
-        target[key] = secondValue as typeof targetValue
-      }
-
+      target[key] = isObject(targetValue) && isObject(secondValue) ? merge(targetValue, secondValue) : secondValue as typeof targetValue
     }
   }
 
