@@ -1,13 +1,10 @@
-import {
-  expect,
-  test,
-} from 'bun:test'
+import { describe, expect, test } from 'bun:test'
 
-import { getConstructorName } from '../src/class'
+import { getConstructorName } from './class'
 
 class Cat {}
 
-test('getConstructorName', () => {
+describe('getConstructorName', () => {
   test('get correctly', () => {
     expect(getConstructorName({})).toBe('Object')
     // eslint-disable-next-line @typescript-eslint/no-empty-function

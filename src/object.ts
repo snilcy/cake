@@ -1,10 +1,9 @@
+import { IDeepPartial, IObject } from './ts/utils'
 import { isObject } from './type'
 
-export const shallowClone = <T extends object>(target: T): T => ({
-  ...target,
-})
+export const shallowClone = <T extends IObject>(target: T): T => ({ ...target })
 
-export const clone = <T extends object>(target: T): T => {
+export const deepClone = <T extends IObject>(target: T): T => {
   const result = {} as T
 
   for (const key in target) {
@@ -12,9 +11,8 @@ export const clone = <T extends object>(target: T): T => {
       const value = target[key]
 
       if (isObject(value)) {
-        result[key] = clone(value)
-      }
-      else {
+        result[key] = deepClone(value)
+      } else {
         target[key] = value
       }
     }
@@ -23,21 +21,31 @@ export const clone = <T extends object>(target: T): T => {
   return target
 }
 
-export const shallowMerge = <F, S >(first: F, second: S): F & S => {
-  return Object.assign({}, first, second)
-}
+export const shallowMerge = <T extends IObject>(
+  first: T,
+  second: Partial<T>,
+): T => ({
+  ...first,
+  ...second,
+})
 
-export const merge = <T extends object>(first: T, second: Partial<T>) => {
-  const target = clone(first)
+export const deepMerge = <T extends IObject>(
+  first: T,
+  second: IDeepPartial<T>,
+) => {
+  const target = deepClone(first)
 
   for (const key in second) {
     if (Object.hasOwnProperty.call(second, key)) {
       const secondValue = second[key]
       const targetValue = target[key]
 
-      target[key] = isObject(targetValue) && isObject(secondValue) ? merge(targetValue, secondValue) : secondValue as typeof targetValue
+      target[key] =
+        isObject(targetValue) && isObject(secondValue)
+          ? deepMerge(targetValue, secondValue)
+          : (secondValue as typeof targetValue)
     }
   }
 
-  return target
+  return target as T
 }
