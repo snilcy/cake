@@ -19,3 +19,11 @@ export const isError = (element: any): element is Error =>
 
 export const isUndefined = (element: any): element is undefined =>
   element === undefined
+
+export const isBrowserEnvironment = new Function(
+  'try {return this===window;}catch(e){ return false;}',
+)
+
+export const isNodeEnvironment = new Function(
+  'try {return this===global;}catch(e){return false;}',
+)
