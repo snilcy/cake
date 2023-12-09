@@ -101,10 +101,10 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     // "skipLibCheck": true /* Skip type checking all .d.ts files. */,
 
-    "types": ["bun-types"],
+    "types": ["bun-types", "web"],
 
     // enable latest features
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "DOM"],
     "module": "esnext",
     "target": "esnext",
 
