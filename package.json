@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest --watch",
+    "test": "bun test --watch",
     "tsc": "tsc --watch",
     "lint": "eslint ./src/"
   },
