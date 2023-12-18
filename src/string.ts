@@ -40,3 +40,8 @@ export const toUpperCase = (string: string) =>
   splitWords(string)
     .map((word) => word.toUpperCase())
     .join('_')
+
+export const toPascalCase = (string: string) =>
+  splitWords(string)
+    .map((word) => capitalizeFirstLetter(word))
+    .join('')
