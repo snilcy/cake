@@ -1,5 +1,5 @@
 import { IDeepPartial, IObject } from './ts/utils'
-import { isObject } from './type'
+import { isObject, isObjectLiteral } from './type'
 
 export const shallowClone = <T extends IObject>(target: T): T => ({ ...target })
 
@@ -10,7 +10,7 @@ export const deepClone = <T extends IObject>(target: T): T => {
     if (Object.hasOwnProperty.call(target, key)) {
       const value = target[key]
 
-      if (isObject(value)) {
+      if (isObjectLiteral(value)) {
         result[key] = deepClone(value)
       } else {
         target[key] = value
@@ -38,7 +38,7 @@ export const deepMerge = <T extends IObject>(
       const targetValue = target[key]
 
       target[key] =
-        isObject(targetValue) && isObject(secondValue)
+        isObjectLiteral(targetValue) && isObjectLiteral(secondValue)
           ? deepMerge(targetValue, secondValue)
           : (secondValue as typeof targetValue)
     }

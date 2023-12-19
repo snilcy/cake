@@ -9,6 +9,9 @@ export const isArray = Array.isArray
 export const isObject = (element: any): element is object =>
   typeof element === 'object' && !isNull(element) && !isArray(element)
 
+export const isObjectLiteral = (element: any): element is object =>
+  element && Object.getPrototypeOf(element) === Object.prototype
+
 export const isFunction = (
   element: any,
 ): // eslint-disable-next-line @typescript-eslint/ban-types
