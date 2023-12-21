@@ -18,7 +18,7 @@ export const deepClone = <T extends IObject>(target: T): T => {
     }
   }
 
-  return target
+  return result
 }
 
 export const shallowMerge = <T = {}>(first: T, second: Partial<T> = {}): T => ({
