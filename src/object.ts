@@ -10,11 +10,7 @@ export const deepClone = <T extends IObject>(target: T): T => {
     if (Object.hasOwnProperty.call(target, key)) {
       const value = target[key]
 
-      if (isObjectLiteral(value)) {
-        result[key] = deepClone(value)
-      } else {
-        target[key] = value
-      }
+      result[key] = isObjectLiteral(value) ? deepClone(value) : value
     }
   }
 
