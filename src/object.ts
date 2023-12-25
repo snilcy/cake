@@ -46,7 +46,11 @@ export const deepMerge = <T extends IObject>(
 export const join = <R, T extends IObject>(
   target: T,
   callback: (key: string, value: keyof T) => R,
-) => Object.keys(target).map((key) => callback(key, target[key]))
+  separator = ' ',
+) =>
+  Object.keys(target)
+    .map((key) => callback(key, target[key]))
+    .join(separator)
 
 export const map = <R = any, T extends IObject = {}>(
   target: T,
@@ -62,4 +66,24 @@ export const map = <R = any, T extends IObject = {}>(
   }
 
   return result
+}
+
+export const flat = (target: IObject, delimeter = '-') =>
+  Object.entries(target).reduce((result: IObject, [key, value]) => {
+    if (isObjectLiteral(value)) {
+      for (const [flatKey, flatValue] of Object.entries(flat(value))) {
+        result[[key, flatKey].join(delimeter)] = flatValue
+      }
+    } else {
+      result[key] = value
+    }
+
+    return result
+  }, {})
+
+export const optinalPath = (objPath: string[], target: IObject, value: any) => {
+  objPath.reduce((result, path, id) => {
+    result[path] = id === objPath.length - 1 ? value : result[path] || {}
+    return result[path]
+  }, target)
 }
