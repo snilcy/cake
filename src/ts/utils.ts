@@ -14,3 +14,5 @@ export type IValuesType<
 > = ValuesType<T>
 
 export type IWriteable<T> = { -readonly [P in keyof T]: T[P] }
+
+export type IConstructable<T = any> = new (...args: any[]) => T
