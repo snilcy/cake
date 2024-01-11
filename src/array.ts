@@ -19,3 +19,9 @@ export const toArray = <T = any>(data: any) =>
 
 export const replace = <T>(arr: T[], target: T, value: T) =>
   arr.map((item) => (item === target ? value : item))
+
+export const move = (arr: any[], from: number, to: number) => {
+  const copy = [...arr]
+  copy.splice(to, 0, copy.splice(from, 1)[0])
+  return copy
+}
