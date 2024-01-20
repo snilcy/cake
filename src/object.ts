@@ -87,3 +87,26 @@ export const optinalPath = (objPath: string[], target: IObject, value: any) => {
     return result[path]
   }, target)
 }
+
+export const diff = <T extends IObject>(first: T, second: T) => {
+  const result: IObject = {} as T
+
+  for (const [key, firstValue] of Object.entries(first)) {
+    if (Object.hasOwn(second, key)) {
+      const secondValue = second[key]
+
+      if (isObjectLiteral(firstValue) && isObjectLiteral(secondValue)) {
+        const objectDiff = diff(firstValue, secondValue)
+        if (Object.keys(objectDiff).length > 0) {
+          result[key] = objectDiff
+        }
+      } else if (firstValue !== secondValue) {
+        result[key] = secondValue
+      }
+    } else {
+      result[key] = second[key]
+    }
+  }
+
+  return result as IDeepPartial<T>
+}
