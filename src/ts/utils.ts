@@ -16,3 +16,5 @@ export type IValuesType<
 export type IWriteable<T> = { -readonly [P in keyof T]: T[P] }
 
 export type IConstructable<T = any> = new (...args: any[]) => T
+
+export type IRecursive<T> = IObject<IObject<T> | T>

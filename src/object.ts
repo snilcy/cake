@@ -1,5 +1,5 @@
-import { IDeepPartial, IObject } from './ts/utils'
-import { isObject, isObjectLiteral } from './type'
+import { IDeepPartial, IObject, IRecursive } from './ts/utils'
+import { isObjectLiteral } from './type'
 
 export const shallowClone = <T extends IObject>(target: T): T => ({ ...target })
 
@@ -81,7 +81,11 @@ export const flat = (target: IObject, delimeter = '-') =>
     return result
   }, {})
 
-export const optinalPath = (objPath: string[], target: IObject, value: any) => {
+export const optionalPath = (
+  objPath: string[],
+  target: IObject,
+  value: any,
+) => {
   objPath.reduce((result, path, id) => {
     result[path] = id === objPath.length - 1 ? value : result[path] || {}
     return result[path]
@@ -109,4 +113,21 @@ export const diff = <T extends IObject>(first: T, second: T) => {
   }
 
   return result as IDeepPartial<T>
+}
+
+export const getOptionalPath = <T>(
+  obj: IRecursive<T>,
+  pathList: string[] = [],
+) => {
+  let target: IObject<T> | T | undefined
+
+  for (let i = 0; i < pathList.length; i++) {
+    const path = pathList[i]
+
+    if (obj && typeof obj === 'object') {
+      target = obj[path]
+    }
+  }
+
+  return target
 }
