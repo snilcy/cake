@@ -119,15 +119,15 @@ export const getOptionalPath = <T>(
   obj: IRecursive<T>,
   pathList: string[] = [],
 ) => {
-  let target: IObject<T> | T | undefined
-
   for (let i = 0; i < pathList.length; i++) {
     const path = pathList[i]
 
     if (obj && typeof obj === 'object') {
-      target = obj[path]
+      obj = obj[path] as IRecursive<T>
+
+      if (i === pathList.length - 1) {
+        return obj
+      }
     }
   }
-
-  return target
 }
