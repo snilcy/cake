@@ -18,8 +18,8 @@ export const isLowerChar = (char: string) =>
 
 const isWordChar = (char: string) => isUpperChar(char) || isLowerChar(char)
 
-const capitalizeFirstLetter = (string: string) =>
-  string.charAt(0).toUpperCase() + string.slice(1)
+export const capitalize = (string: string) =>
+  string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
 
 const splitWords = (string: string) =>
   string
@@ -33,7 +33,7 @@ export const toKebabCase = (string: string) => splitWords(string).join('-')
 
 export const toCamelCase = (string: string) =>
   splitWords(string)
-    .map((word, id) => (id > 0 ? capitalizeFirstLetter(word) : word))
+    .map((word, id) => (id > 0 ? capitalize(word) : word))
     .join('')
 
 export const toUpperCase = (string: string) =>
@@ -43,5 +43,5 @@ export const toUpperCase = (string: string) =>
 
 export const toPascalCase = (string: string) =>
   splitWords(string)
-    .map((word) => capitalizeFirstLetter(word))
+    .map((word) => capitalize(word))
     .join('')

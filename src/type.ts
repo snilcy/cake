@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/array-type */
 export const isString = (element: any): element is string =>
   typeof element === 'string'
 

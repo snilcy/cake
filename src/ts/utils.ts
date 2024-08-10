@@ -18,3 +18,6 @@ export type IWriteable<T> = { -readonly [P in keyof T]: T[P] }
 export type IConstructable<T = any> = new (...args: any[]) => T
 
 export type IRecursive<T> = IObject<IObject<T> | T>
+
+export type IWithOptional<T, K extends keyof T> = Omit<T, K> &
+  Partial<Pick<T, K>>
