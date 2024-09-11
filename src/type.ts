@@ -32,3 +32,5 @@ export const isBrowserEnvironment = new Function(
 export const isNodeEnvironment = new Function(
   'try {return this===global;}catch(e){return false;}',
 )
+
+export { default as is } from '@sindresorhus/is'

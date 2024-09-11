@@ -42,5 +42,5 @@
     "typescript": "^5.5.4",
     "utility-types": "^3.10.0"
   },
-  "dependencies": { "@eslint/js": "^9.9.1", "@types/eslint__js": "^8.42.3", "dayjs": "^1.11.12", "typescript-eslint": "^8.4.0" }
+  "dependencies": { "@sindresorhus/is": "^7.0.0", "dayjs": "^1.11.12", "type-fest": "^4.25.0" }
 }

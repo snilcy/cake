@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'bun:test'
 
-import { toCamelCase, toKebabCase, toUpperCase } from '.'
+import { toCamelCase, toKebabCase, toPascalCase, toUpperCase } from '.'
 
 describe('toKebabCase', () => {
   test('camelCase', () => {
-    expect(toKebabCase('initialScale')).toBe('initial-scale')
+    expect(toKebabCase('camelCase')).toBe('camel-case')
   })
   test('kebab-case', () => {
     expect(toKebabCase('kebab-case')).toBe('kebab-case')
@@ -21,11 +21,14 @@ describe('toKebabCase', () => {
   test('UPPER_CASE', () => {
     expect(toKebabCase('UPPER_CASE')).toBe('upper-case')
   })
+  test('1UPPER_CASE', () => {
+    expect(toKebabCase('1UPPER_CASE')).toBe('1-upper-case')
+  })
 })
 
 describe('camelCase', () => {
   test('camelCase', () => {
-    expect(toCamelCase('initialScale')).toBe('initialScale')
+    expect(toCamelCase('camelCase')).toBe('camelCase')
   })
   test('kebab-case', () => {
     expect(toCamelCase('kebab-case')).toBe('kebabCase')
@@ -39,14 +42,14 @@ describe('camelCase', () => {
   test('PascalCase', () => {
     expect(toCamelCase('PascalCase')).toBe('pascalCase')
   })
-  test('UPPER_CASE', () => {
-    expect(toCamelCase('UPPER_CASE')).toBe('upperCase')
+  test('1UPPER_CASE', () => {
+    expect(toCamelCase('1UPPER_CASE')).toBe('1UpperCase')
   })
 })
 
-describe.only('UPPER_CASE', () => {
+describe('UPPER_CASE', () => {
   test('camelCase', () => {
-    expect(toUpperCase('initialScale')).toBe('INITIAL_SCALE')
+    expect(toUpperCase('camelCase')).toBe('CAMEL_CASE')
   })
   test('kebab-case', () => {
     expect(toUpperCase('kebab-case')).toBe('KEBAB_CASE')
@@ -62,5 +65,32 @@ describe.only('UPPER_CASE', () => {
   })
   test('UPPER_CASE', () => {
     expect(toUpperCase('UPPER_CASE')).toBe('UPPER_CASE')
+  })
+  test('1UPPER_CASE', () => {
+    expect(toUpperCase('1UPPER_CASE')).toBe('1_UPPER_CASE')
+  })
+})
+
+describe('PascalCase', () => {
+  test('camelCase', () => {
+    expect(toPascalCase('camelCase')).toBe('CamelCase')
+  })
+  test('kebab-case', () => {
+    expect(toPascalCase('kebab-case')).toBe('KebabCase')
+  })
+  test('snake_case', () => {
+    expect(toPascalCase('snake_case')).toBe('SnakeCase')
+  })
+  test('flat', () => {
+    expect(toPascalCase('description')).toBe('Description')
+  })
+  test('PascalCase', () => {
+    expect(toPascalCase('PascalCase')).toBe('PascalCase')
+  })
+  test('UPPER_CASE', () => {
+    expect(toPascalCase('UPPER_CASE')).toBe('UpperCase')
+  })
+  test('1UPPER_CASE', () => {
+    expect(toPascalCase('1UPPER_CASE')).toBe('1UpperCase')
   })
 })

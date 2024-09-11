@@ -25,3 +25,19 @@ export const move = (arr: any[], from: number, to: number) => {
   copy.splice(to, 0, copy.splice(from, 1)[0])
   return copy
 }
+
+export const sizeSplit = <T>(arr: T[], sliceSize: number): T[][] => {
+  const slices = Math.round(arr.length / sliceSize)
+  const result: T[][] = []
+
+  if (slices === 0) return [[]]
+
+  for (let i = 0; i < slices; i++) {
+    result.push(arr.slice(i * sliceSize, i * sliceSize + sliceSize))
+  }
+
+  return result
+}
+
+const res = sizeSplit([], 2)
+console.log(res)

@@ -1,5 +1,5 @@
 import { IDeepPartial, IObject, IRecursive } from './ts/utils'
-import { isObjectLiteral } from './type'
+import { isObject, isObjectLiteral } from './type'
 
 export const shallowClone = <T extends IObject>(target: T): T => ({ ...target })
 
@@ -130,4 +130,20 @@ export const getOptionalPath = <T>(
       }
     }
   }
+}
+
+export const isShallowEqual = (
+  first?: Record<string, any>,
+  second?: Record<string, any>,
+) => {
+  if (!isObject(first) || !isObject(second)) return false
+  if (first === second) return true
+
+  const firstKeys = Object.keys(first)
+  const secondKeys = Object.keys(second)
+
+  return (
+    firstKeys.length === secondKeys.length &&
+    firstKeys.every((key) => first[key] === second[key])
+  )
 }

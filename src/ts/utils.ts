@@ -1,3 +1,4 @@
+import type {} from 'type-fest'
 import type { DeepPartial, ValuesType } from 'utility-types'
 
 export type IDeepPartial<T> = DeepPartial<T>
