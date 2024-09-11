@@ -1,0 +1,25 @@
+@use "sass:meta";
+@use "./type.scss";
+
+@function every($list, $callback) {
+  @if meta.type-of($list) != "list" {
+    @error "List must be a list, get #{$list}";
+  }
+
+  @for $id from 1 through length($list) {
+    $item: nth($list, $id);
+    // $result: $callback();
+    $result: meta.call($callback, $item);
+    // @debug "Result: #{$result}";
+
+    @if not $result {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+@function every-numbers($list) {
+  @return every((1, 2, 3), meta.get-function("isnumber"));
+}

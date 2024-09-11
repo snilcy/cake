@@ -1,4 +1,4 @@
-export const throttle = (fn: Function, wait: number = 300) => {
+export const throttle = (fn: Function, wait = 300) => {
   let inThrottle: boolean,
     lastFn: ReturnType<typeof setTimeout>,
     lastTime: number

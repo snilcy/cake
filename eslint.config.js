@@ -1,0 +1,1 @@
+/home/rocket/git/rocket/eslint-config/eslint.config.js

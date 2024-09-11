@@ -1,6 +1,0 @@
-{
-  "extends": ["@snilcy/eslint-config/typescript"],
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  }
-}

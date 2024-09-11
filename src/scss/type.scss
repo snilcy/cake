@@ -1,0 +1,4 @@
+@function isnumber($item) {
+  // @debug "isnumber #{$item}";
+  @return meta.type-of($item) == "number";
+}
