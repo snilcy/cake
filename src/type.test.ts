@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'bun:test'
+
 import chalk from 'chalk'
 
 import { isError, isNull, isObject } from './type'

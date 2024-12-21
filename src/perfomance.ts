@@ -1,12 +1,10 @@
-import { wait } from '.'
-
-export const throttle = (fn: Function, wait: number = 300) => {
+export const throttle = (fn: Function, wait = 300) => {
   let inThrottle: boolean,
     lastFn: ReturnType<typeof setTimeout>,
     lastTime: number
   return function (this: any) {
-    const context = this,
-      args = arguments
+    const args = arguments,
+      context = this
     if (inThrottle) {
       clearTimeout(lastFn)
       lastFn = setTimeout(
@@ -26,11 +24,34 @@ export const throttle = (fn: Function, wait: number = 300) => {
   }
 }
 
-export const debounce = (fn: Function, ms = 300) => {
+export const debounce = (
+  fn: Function,
+  ms = 300,
+  params: {
+    onEnd?: () => void
+    onStart?: () => void
+  } = {},
+) => {
   let timeoutId: ReturnType<typeof setTimeout>
   return function (this: any, ...args: any[]) {
     clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => fn.apply(this, args), ms)
+    timeoutId = setTimeout(() => {
+      if (params.onStart) params.onStart()
+
+      // Promise.resolve(fn(this, args)).finally(() => {
+      //   console.log('finally')
+      //   if (params.onEnd) params.onEnd()
+      // })
+
+      const result = fn.apply(this, args)
+      if (result instanceof Promise) {
+        result.finally(() => {
+          if (params.onEnd) params.onEnd()
+        })
+      } else {
+        if (params.onEnd) params.onEnd()
+      }
+    }, ms)
   }
 }
 
@@ -47,7 +68,9 @@ export interface ICakeRateLimitIntervalData {
 
 export class RateLimit {
   readonly interval!: number
+
   readonly parallel = Infinity
+
   readonly perInterval!: number
 
   private intervalData: ICakeRateLimitIntervalData = this.updateIntervalData()
@@ -87,7 +110,7 @@ export class RateLimit {
   push<R = {}>(callback: () => R) {
     const lastIntervalData = this.getIntervalData()
 
-    const promise: Promise<R> = new Promise((resolve, reject) => {
+    const promise = new Promise<R>((resolve, reject) => {
       lastIntervalData.executeCounte += 1
       setTimeout(async () => {
         try {

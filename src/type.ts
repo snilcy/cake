@@ -11,10 +11,9 @@ export const isObject = (element: any): element is object =>
 export const isObjectLiteral = (element: any): element is object =>
   element && Object.getPrototypeOf(element) === Object.prototype
 
-export const isFunction = (
-  element: any,
-): // eslint-disable-next-line @typescript-eslint/ban-types
-element is Function => typeof element === 'function'
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+export const isFunction = (element: any): element is Function =>
+  typeof element === 'function'
 
 export const isError = (element: any): element is Error =>
   element instanceof Error

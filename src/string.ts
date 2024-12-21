@@ -140,4 +140,4 @@ export const toPascalCase = (string: string) => {
     .join('')
 }
 
-console.log(toUpperCase('TinkoffAssetStructuredProduct').toLowerCase())
+// console.log(toUpperCase('TinkoffAssetStructuredProduct').toLowerCase())

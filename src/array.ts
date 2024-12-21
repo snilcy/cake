@@ -39,5 +39,5 @@ export const sizeSplit = <T>(arr: T[], sliceSize: number): T[][] => {
   return result
 }
 
-const res = sizeSplit([], 2)
-console.log(res)
+// const res = sizeSplit([], 2)
+// console.log(res)
