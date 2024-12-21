@@ -1,0 +1,12 @@
+import { IDeepPartial, IObject, IRecursive } from './ts/utils';
+export declare const shallowClone: <T extends IObject>(target: T) => T;
+export declare const deepClone: <T extends IObject>(target: T) => T;
+export declare const shallowMerge: <T = {}>(first: T, second?: Partial<T>) => T;
+export declare const deepMerge: <T extends IObject>(first: T, second: IDeepPartial<T>) => T;
+export declare const join: <R, T extends IObject>(target: T, callback: (key: string, value: keyof T) => R, separator?: string) => string;
+export declare const map: <R = any, T extends IObject = {}>(target: T, callback: (value: T[keyof T], key: keyof T) => R) => Record<keyof T, R>;
+export declare const flat: (target: IObject, delimeter?: string) => IObject;
+export declare const optionalPath: (objPath: string[], target: IObject, value: any) => void;
+export declare const diff: <T extends IObject>(first: T, second: T) => IDeepPartial<T>;
+export declare const getOptionalPath: <T>(obj: IRecursive<T>, pathList?: string[]) => IRecursive<T> | undefined;
+export declare const isShallowEqual: (first?: Record<string, any>, second?: Record<string, any>) => boolean;

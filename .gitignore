@@ -145,5 +145,3 @@ dist
 
 *.env
 *.pem
-
-build
